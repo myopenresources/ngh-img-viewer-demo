@@ -1,0 +1,44 @@
+<div class="app-img-viewer-container app-img-viewer-fixed app-img-viewer-fade app-img-viewer-transition app-img-viewer-in"
+    [ngStyle]="{'z-index':imgzIndex}" [hidden]="!imgViewerVisible">
+    <div class="app-img-viewer-canvas" [ngClass]="imgPlayer?'app-img-viewer-player':''">
+        <div>
+            <img #currentImgEle class="app-img-viewer-transition app-img-viewer-move">
+        </div>
+    </div>
+    <div class="app-img-viewer-footer" *ngIf="!imgPlayer" [ngStyle]="{'height':viewFooterHeight+'px'}">
+        <ng-container *ngIf="viewFooterVisible">
+            <div class="app-img-viewer-title" *ngIf="viewerTitleVisible" [ngStyle]="{'height':viewerTitleHeight+'px'}">
+                {{imgList[imgindex]?.label?imgList[imgindex]?.label:imgPreviewLabel+(imgindex+1)}}
+                ({{imgNaturalWidth}} ×
+                {{imgNaturalHeight}})</div>
+            <div class="app-img-viewer-toolbar" *ngIf="viewerToolbarVisible"
+                [ngStyle]="{'height':viewerToolbarHeight+'px'}">
+                <ul>
+                    <li class="app-img-viewer-zoom-in" (click)="zoomIn()"></li>
+                    <li class="app-img-viewer-zoom-out" (click)="zoomOut()"></li>
+                    <li class="app-img-viewer-one-to-one" (click)="oneToOne()"></li>
+                    <li class="app-img-viewer-reset" (click)="reset()"></li>
+                    <li class="app-img-viewer-prev" (click)="prev()"></li>
+                    <li class="app-img-viewer-play" (click)="play()"></li>
+                    <li class="app-img-viewer-next" (click)="next()"></li>
+                    <li class="app-img-viewer-rotate-left" (click)="rotateLeft()"></li>
+                    <li class="app-img-viewer-rotate-right" (click)="rotateRight()"></li>
+                    <li class="app-img-viewer-flip-horizontal" (click)="flipHorizontal()"></li>
+                    <li class="app-img-viewer-flip-vertical" (click)="flipVertical()"></li>
+                </ul>
+            </div>
+            <div class="app-img-viewer-navbar" *ngIf="viewerNavbarVisible"
+                [ngStyle]="{'height':viewerNavbarHeight+'px'}">
+                <ul class="app-img-viewer-list app-img-viewer-transition">
+                    <li [ngClass]="(i===imgindex)?'app-img-viewer-active':''" (click)="navbarActive(i)"
+                        *ngFor="let item of imgList;let i=index">
+                        <img [attr.src]="item.src">
+                    </li>
+                </ul>
+            </div>
+        </ng-container>
+    </div>
+    <div class="app-img-viewer-tooltip" [hidden]="!imgTooltipVisible">{{imgTooltip}}</div>
+    <div class="app-img-viewer-button app-img-viewer-close" (click)="close()"></div>
+    <div class="app-img-viewer-loading" [hidden]="!viewerLoadingVisible"></div>
+</div>

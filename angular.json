@@ -122,6 +122,47 @@
           }
         }
       }
+    },
+    "ngh-img-viewer": {
+      "projectType": "library",
+      "root": "projects/ngh-img-viewer",
+      "sourceRoot": "projects/ngh-img-viewer/src",
+      "prefix": "ngh",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/ngh-img-viewer/tsconfig.lib.json",
+            "project": "projects/ngh-img-viewer/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngh-img-viewer/tsconfig.lib.prod.json",
+	      "project": "projects/ngh-img-viewer/ng-package.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngh-img-viewer/src/test.ts",
+            "tsConfig": "projects/ngh-img-viewer/tsconfig.spec.json",
+            "karmaConfig": "projects/ngh-img-viewer/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngh-img-viewer/tsconfig.lib.json",
+              "projects/ngh-img-viewer/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ngh-img-viewer-demo"
